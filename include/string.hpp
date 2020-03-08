@@ -21,7 +21,7 @@ class String {
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  explicit String(const char* data);
+  String(const char* data);
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
@@ -51,7 +51,7 @@ class String {
   /// <param name="substr">Подстрока, которую необходимо найти </param>
   /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
   /// возвратить -1</returns>
-  [[nodiscard]] size_t Find(const String& substr) const;
+  size_t Find(const String& substr) const;
 
   /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
   /// <param name="oldSymbol">Символ, который требуется заменить </param>
@@ -60,10 +60,10 @@ class String {
 
   /// Функция возвращает длину строки
   /// <returns>Возвращаем длину строки</returns>
-  [[nodiscard]] size_t Size() const;
+  size_t Size() const;
 
   /// Функция для определения пуста ли строка
-  [[nodiscard]] bool Empty() const;
+  bool Empty() const;
 
   /// Оператор []
   /// <example>
@@ -111,12 +111,7 @@ class String {
 
   friend std::ostream& operator<<(std::ostream&, const String&);
 
-  void extend_linear(size_t value);
-
-  void append_char(char c);
  private:
-  size_t length;
-  size_t capacity;
   char* Data;
 };
 
@@ -151,7 +146,5 @@ bool operator>(const String& a, const String& b);
 /// <param name="str">Строка, которую выводим </param>
 /// <returns>Возвращаем ссылку на поток</returns>
 std::ostream& operator<<(std::ostream& out, const String& str);
-
-bool operator== (const char* chars, const String str);
 
 #endif  // INCLUDE_STRING_HPP_
