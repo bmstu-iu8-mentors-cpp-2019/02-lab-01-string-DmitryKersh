@@ -133,10 +133,12 @@ char& String::operator[](size_t index) { return Data[index]; }
 void String::LTrim(char symbol){
   size_t offset;
   for (offset = 0; ((Data[offset] == symbol) && (offset < length)); offset++){ }
-
-  Data += offset;
   length -= offset;
   capacity -= offset;
+  char* saved_data = Data;
+  Data = new char[capacity];
+  for(size_t i = 0; i < length; i++) Data[i] = saved_data[i + offset];
+  delete[] saved_data;
 }
 
 void String::RTrim(char symbol){
