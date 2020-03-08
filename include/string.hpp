@@ -109,9 +109,15 @@ class String {
 
   void swap(String& oth);
 
+  void extend_linear(size_t value);
+
+  void append_char(char c);
+
   friend std::ostream& operator<<(std::ostream&, const String&);
 
  private:
+  size_t  length;
+  size_t capacity;
   char* Data;
 };
 
@@ -147,4 +153,5 @@ bool operator>(const String& a, const String& b);
 /// <returns>Возвращаем ссылку на поток</returns>
 std::ostream& operator<<(std::ostream& out, const String& str);
 
+bool operator== (const char* chars, const String str);
 #endif  // INCLUDE_STRING_HPP_

@@ -70,7 +70,7 @@ TEST(String, Size) {
 
 TEST(String, Mult) {
   String s1("ABC");
-  s1 *= 2;
+  s1 *= 3;
 
   EXPECT_EQ(s1, String("ABCABCABC"));
 
