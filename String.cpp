@@ -69,7 +69,7 @@ String& String::operator+=(const String& rhs){
 String& String::operator*=(unsigned int m){
   //saving old pointer
   char* saved_data = Data;
-  unsigned int old_len = length;
+  size_t old_len = length;
 
   length *= m;
   capacity = length + 10;
@@ -79,6 +79,7 @@ String& String::operator*=(unsigned int m){
     for (size_t j = 0; j < old_len; j++){
       Data[i * old_len + j] = saved_data[j];
     }
+  delete[] saved_data;
   return  *this;
 }
 
