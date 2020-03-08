@@ -61,7 +61,7 @@ String& String::operator+=(const String& rhs){
     Data[length + i] = rhs.Data[i];
 
   length += rhs.length;
-  delete[] saved_data;
+  //delete[] saved_data;
   return *this;
 }
 
@@ -185,7 +185,7 @@ void String::extend_linear(const size_t value){
 
   for (size_t i = 0; i < length; i++) new_data[i] = Data[i];
 
-  delete[] Data;
+  //delete[] Data;
   Data = new_data;
   capacity += value;
 }
@@ -196,5 +196,5 @@ void String::append_char(const char c) {
   length++;
 }
 
-bool operator== (const char* chars, const String str)
+bool operator== (const char* chars, const String& str)
 { return String(chars) == str; }

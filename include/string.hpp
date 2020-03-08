@@ -154,5 +154,5 @@ bool operator>(const String& a, const String& b);
 /// <returns>Возвращаем ссылку на поток</returns>
 std::ostream& operator<<(std::ostream& out, const String& str);
 
-bool operator== (const char* chars, const String str);
+bool operator== (const char* chars, const String& str);
 #endif  // INCLUDE_STRING_HPP_
