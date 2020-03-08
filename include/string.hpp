@@ -107,7 +107,7 @@ class String {
   /// <param name="symbol"> Значение символов, которе отрезаем </param>
   void LTrim(char symbol);
 
-  void swap(String& oth);
+  void Swap(String& oth);
 
   void extend_linear(size_t value);
 

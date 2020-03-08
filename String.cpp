@@ -144,7 +144,7 @@ void String::RTrim(char symbol){
     length--;
 }
 
-void String::swap(String& oth){
+void String::Swap(String& oth){
   size_t temp = length;
   length = oth.length;
   oth.length = temp;
