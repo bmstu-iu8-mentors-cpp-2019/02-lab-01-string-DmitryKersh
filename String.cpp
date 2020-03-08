@@ -105,7 +105,6 @@ bool String::operator<(const String& rhs) const {
 
 size_t String::Find(const String& substr) const {
   for (size_t pos = 0; pos < this->length - substr.length + 1; pos++){
-
     bool equal = true;
 
     for (size_t i = 0; i < substr.length; i++) {

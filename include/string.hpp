@@ -21,7 +21,7 @@ class String {
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  String(const char* data);
+  explicit String(const char* data);
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
@@ -51,7 +51,7 @@ class String {
   /// <param name="substr">Подстрока, которую необходимо найти </param>
   /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
   /// возвратить -1</returns>
-  size_t Find(const String& substr) const;
+  [[nodiscard]] size_t Find(const String& substr) const;
 
   /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
   /// <param name="oldSymbol">Символ, который требуется заменить </param>
@@ -60,10 +60,10 @@ class String {
 
   /// Функция возвращает длину строки
   /// <returns>Возвращаем длину строки</returns>
-  size_t Size() const;
+  [[nodiscard]] size_t Size() const;
 
   /// Функция для определения пуста ли строка
-  bool Empty() const;
+  [[nodiscard]] bool Empty() const;
 
   /// Оператор []
   /// <example>
