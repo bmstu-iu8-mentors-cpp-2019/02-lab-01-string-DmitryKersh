@@ -1,6 +1,4 @@
-//
-// Created by User on 08.03.2020.
-//
+//Copyright 2020 XXXPUSSYDESTROYERXXX
 #include "string.hpp"
 
 String::~String() {
@@ -21,7 +19,6 @@ String::String(const String& rhs) {
   for (size_t i = 0; i < length; i++){
     Data[i] = rhs.Data[i];
   }
-
 }
 
 String::String(const char* data) {
@@ -84,7 +81,7 @@ String& String::operator*=(unsigned int m){
   return  *this;
 }
 
-bool String::operator==(const String& rhs) const{
+bool String::operator==(const String& rhs) const {
   if (length != rhs.length) return false;
 
   for (size_t i = 0; i < length; i++)
@@ -93,27 +90,26 @@ bool String::operator==(const String& rhs) const{
   return true;
 }
 
-bool String::operator<(const String& rhs) const{
+bool String::operator<(const String& rhs) const {
   unsigned int min_length;
   length < rhs.length ? min_length = length : min_length = rhs.length;
 
   for (size_t i = 0; i < min_length; i++){
-    if(Data[i] < rhs.Data[i]) return true;
-    if(Data[i] > rhs.Data[i]) return false;
+    if (Data[i] < rhs.Data[i]) return true;
+    if (Data[i] > rhs.Data[i]) return false;
   }
-
   //  if all chars from 0 to min_length are equal then *this < rhs only if
   //  length < rhs.length
   return length < rhs.length;
 }
 
-size_t String::Find(const String& substr) const{
-  for(size_t pos = 0; pos < this->length - substr.length + 1; pos++){
+size_t String::Find(const String& substr) const {
+  for (size_t pos = 0; pos < this->length - substr.length + 1; pos++){
 
     bool equal = true;
 
-    for(size_t i = 0; i < substr.length; i++){
-      if(Data[pos + i] != substr[i])
+    for (size_t i = 0; i < substr.length; i++) {
+      if (Data[pos + i] != substr[i])
         equal = false;
     }
     if (equal)
@@ -122,9 +118,9 @@ size_t String::Find(const String& substr) const{
   return -1;
 }
 
-void String::Replace(char oldSymbol, char newSymbol){
-  for(size_t i = 0; i < length; i++)
-    if(Data[i] == oldSymbol) Data[i] = newSymbol;
+void String::Replace(char oldSymbol, char newSymbol) {
+  for (size_t i = 0; i < length; i++)
+    if (Data[i] == oldSymbol) Data[i] = newSymbol;
 }
 
 size_t String::Size() const { return length; }
@@ -137,7 +133,7 @@ char& String::operator[](size_t index) { return Data[index]; }
 
 void String::LTrim(char symbol){
   size_t offset;
-  for (offset = 0; ((Data[offset] == symbol) && (offset < length)); offset++);
+  for (offset = 0; ((Data[offset] == symbol) && (offset < length)); offset++){ }
 
   Data += offset;
   length -= offset;
@@ -164,7 +160,7 @@ void String::swap(String& oth){
 }
 
 std::ostream& operator<<(std::ostream& out, const String& str){
-  for(size_t i = 0; i < str.length; i++) out << str[i];
+  for (size_t i = 0; i < str.length; i++) out << str[i];
   return out;
 }
 
@@ -182,7 +178,8 @@ String operator*(const String& a, unsigned int b){
 
 bool operator!=(const String& a, const String& b) { return !(a == b); }
 
-bool operator>(const String& a, const String& b) { return !((a == b) || (a < b)); }
+bool operator>(const String& a, const String& b)
+{ return !((a == b) || (a < b)); }
 
 void String::extend_linear(const size_t value){
   char* new_data = new char[capacity + value];
@@ -200,4 +197,5 @@ void String::append_char(const char c) {
   length++;
 }
 
-bool operator== (const char* chars, const String str){ return String(chars) == str; }
+bool operator== (const char* chars, const String str)
+{ return String(chars) == str; }
