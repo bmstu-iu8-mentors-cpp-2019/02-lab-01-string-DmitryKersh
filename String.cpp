@@ -137,7 +137,7 @@ void String::LTrim(char symbol){
   capacity -= offset;
   char* saved_data = Data;
   Data = new char[capacity];
-  for(size_t i = 0; i < length; i++) Data[i] = saved_data[i + offset];
+  for (size_t i = 0; i < length; i++) Data[i] = saved_data[i + offset];
   delete[] saved_data;
 }
 
