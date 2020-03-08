@@ -34,6 +34,7 @@ String::String(const char* data) {
 }
 
 String& String::operator=(const String& rhs){
+  delete[] Data;
   Data = new char[rhs.capacity];
   length = rhs.length;
   capacity = rhs.capacity;
