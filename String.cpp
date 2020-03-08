@@ -61,7 +61,7 @@ String& String::operator+=(const String& rhs){
     Data[length + i] = rhs.Data[i];
 
   length += rhs.length;
-  //delete[] saved_data;
+  delete[] saved_data;
   return *this;
 }
 
