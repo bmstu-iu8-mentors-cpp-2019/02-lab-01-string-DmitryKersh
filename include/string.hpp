@@ -118,6 +118,7 @@ class String {
   friend std::ostream& operator<<(std::ostream&, const String&);
   friend String operator+(const String& a, const String& b);
   friend String operator*(const String& a, unsigned int b);
+
  private:
   size_t length;
   size_t capacity;
