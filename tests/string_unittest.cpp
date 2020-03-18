@@ -43,7 +43,7 @@ TEST(String, GetByIndex) {
 
 TEST(String, Append) {
   String s1("some");
-  s1 += " ";
+  s1 += String(" ");
   s1 += String("string");
 
   String s2 = String("some ") + String("string");
@@ -70,7 +70,7 @@ TEST(String, Size) {
 
 TEST(String, Mult) {
   String s1("ABC");
-  s1 *= 2;
+  s1 *= 3;
 
   EXPECT_EQ(s1, String("ABCABCABC"));
 
@@ -94,14 +94,14 @@ TEST(String, Trim) {
 TEST(String, Find) {
   String s1("some string");
 
-  EXPECT_EQ(4, s1.Find(" "));
-  EXPECT_EQ(5, s1.Find("str"));
-  EXPECT_EQ(0, s1.Find("some"));
-  
+  EXPECT_EQ(4, s1.Find(String(" ")));
+  EXPECT_EQ(5, s1.Find(String("str")));
+  EXPECT_EQ(0, s1.Find(String("some")));
+
   EXPECT_EQ(9, String{"str stri string"}.Find(String{"string"}));
   EXPECT_EQ(6, String{"strinsstring"}.Find(String{"string"}));
 
-  EXPECT_EQ(static_cast<size_t>(-1), s1.Find("not found"));
+  EXPECT_EQ(static_cast<size_t>(-1), s1.Find(String("not found")));
 }
 
 TEST(String, Stream) {
@@ -115,7 +115,6 @@ TEST(String, Stream) {
 TEST(String, Swap) {
   String s0("some string");
   String s1("other string");
-  
 
   EXPECT_EQ("some string", s0);
   EXPECT_EQ("other string", s1);
