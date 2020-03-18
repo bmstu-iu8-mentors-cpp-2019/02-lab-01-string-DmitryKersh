@@ -169,6 +169,7 @@ String operator+(const String& a, const String& b){
   String result;
   result.length = a.length + b.length;
   result.capacity = result.length + 10;
+  delete[] result.Data;
   result.Data = new char[result.capacity];
 
   for (size_t i = 0; i < a.length; i++)
@@ -184,6 +185,7 @@ String operator*(const String& a, unsigned int b){
   String result;
   result.length = a.length * b;
   result.capacity = result.length + 10;
+  delete[] result.Data;
   result.Data = new char[result.capacity];
 
   for (unsigned int iteration = 0; iteration < b; iteration++)
