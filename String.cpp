@@ -22,9 +22,7 @@ String::String(const String& rhs) {
 }
 
 String::String(const char* data) {
-  //finding length
-  length = 0;
-  while (data[length] != '\0') length++;
+  length = strlen(data);
 
   Data = new char[length + 10];
   capacity = length + 10;
@@ -34,6 +32,8 @@ String::String(const char* data) {
 }
 
 String& String::operator=(const String& rhs){
+  if (&rhs == this) return *this;
+
   delete[] Data;
   Data = new char[rhs.capacity];
   length = rhs.length;
@@ -84,6 +84,7 @@ String& String::operator*=(unsigned int m){
 }
 
 bool String::operator==(const String& rhs) const {
+  if (this == &rhs) return true;
   if (length != rhs.length) return false;
 
   for (size_t i = 0; i < length; i++)
@@ -93,9 +94,9 @@ bool String::operator==(const String& rhs) const {
 }
 
 bool String::operator<(const String& rhs) const {
-  unsigned int min_length;
-  length < rhs.length ? min_length = length : min_length = rhs.length;
+  size_t min_length;
 
+  min_length = length < rhs.length ? length : rhs.length;
   for (size_t i = 0; i < min_length; i++){
     if (Data[i] < rhs.Data[i]) return true;
     if (Data[i] > rhs.Data[i]) return false;
@@ -106,7 +107,7 @@ bool String::operator<(const String& rhs) const {
 }
 
 size_t String::Find(const String& substr) const {
-  for (size_t pos = 0; pos < this->length - substr.length + 1; pos++){
+  for (size_t pos = 0; pos < length - substr.length + 1; pos++){
     bool equal = true;
 
     for (size_t i = 0; i < substr.length; i++) {
@@ -135,10 +136,13 @@ char& String::operator[](size_t index) { return Data[index]; }
 void String::LTrim(char symbol){
   size_t offset;
   for (offset = 0; ((Data[offset] == symbol) && (offset < length)); offset++){ }
+
   length -= offset;
   capacity -= offset;
+
   char* saved_data = Data;
   Data = new char[capacity];
+
   for (size_t i = 0; i < length; i++) Data[i] = saved_data[i + offset];
   delete[] saved_data;
 }
@@ -148,18 +152,12 @@ void String::RTrim(char symbol){
     length--;
 }
 
-void String::Swap(String& oth){
-  size_t temp = length;
-  length = oth.length;
-  oth.length = temp;
+void String::swap(String& oth){
+  std::swap(length, oth.length);
 
-  temp = capacity;
-  capacity = oth.capacity;
-  oth.capacity = temp;
+  std::swap(capacity, oth.capacity);
 
-  char* temp_ptr = Data;
-  Data = oth.Data;
-  oth.Data = temp_ptr;
+  std::swap(Data, oth.Data);
 }
 
 std::ostream& operator<<(std::ostream& out, const String& str){
@@ -168,22 +166,38 @@ std::ostream& operator<<(std::ostream& out, const String& str){
 }
 
 String operator+(const String& a, const String& b){
-  String temp = a;
-  temp += b;
-  return temp;
+  String result;
+  result.length = a.length + b.length;
+  result.capacity = result.length + 10;
+  result.Data = new char[result.capacity];
+
+  for (size_t i = 0; i < a.length; i++)
+    result.Data[i] = a.Data[i];
+
+  for (size_t i = a.length; i < result.length; i++)
+    result.Data[i] = b.Data[i - a.length];
+
+  return result;
 }
 
 String operator*(const String& a, unsigned int b){
-  String temp = a;
-  temp *= b;
-  return temp;
+  String result;
+  result.length = a.length * b;
+  result.capacity = result.length + 10;
+  result.Data = new char[result.capacity];
+
+  for (unsigned int iteration = 0; iteration < b; iteration++)
+    for (size_t pos = 0; pos < a.length; pos++)
+      result.Data[a.length * iteration + pos] = a.Data[pos];
+
+  return result;
 }
 
 bool operator!=(const String& a, const String& b) { return !(a == b); }
 
-bool operator>(const String& a, const String& b)
-{ return !((a == b) || (a < b)); }
+bool operator>(const String& a, const String& b) { return b < a; }
 
+/*
 void String::extend_linear(const size_t value){
   char* new_data = new char[capacity + value];
 
@@ -199,6 +213,7 @@ void String::append_char(const char c) {
   Data[length] = c;
   length++;
 }
-
-bool operator== (const char* chars, const String& str)
-{ return String(chars) == str; }
+*/
+bool operator== (const char* chars, const String& str){
+  return String(chars) == str;
+}

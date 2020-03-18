@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <iostream>
 #include <utility>
+#include <cstring>
 
 class String {
  public:
@@ -108,16 +109,17 @@ class String {
   /// <param name="symbol"> Значение символов, которе отрезаем </param>
   void LTrim(char symbol);
 
-  void Swap(String& oth);
-
+  void swap(String& oth);
+/*
   void extend_linear(size_t value);
 
   void append_char(char c);
-
+*/
   friend std::ostream& operator<<(std::ostream&, const String&);
-
+  friend String operator+(const String& a, const String& b);
+  friend String operator*(const String& a, unsigned int b);
  private:
-  size_t  length;
+  size_t length;
   size_t capacity;
   char* Data;
 };
@@ -131,7 +133,7 @@ class String {
 /// </code>
 /// </example>
 /// <returns>Возвращаем строку равную a + b</returns>
-String operator+(const String& a, const String& b);
+
 
 /// Оператор +
 /// <example>
@@ -140,7 +142,7 @@ String operator+(const String& a, const String& b);
 /// String c = a * 5; // c равна "AAAAA"
 /// </code>
 /// </example>
-String operator*(const String& a, unsigned int b);
+
 
 /// Оператор !=
 bool operator!=(const String& a, const String& b);
